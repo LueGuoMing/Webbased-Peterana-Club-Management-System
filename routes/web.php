@@ -47,14 +47,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    /** Member clubs and events route */
+
     Route::get('/member/clubs/index', [MemberClubController::class, 'index'])->name('member.clubs.index');
-    Route::get('/member/rooms/index', [MemberRoomController::class, 'index'])->name('member.rooms.index');
-    Route::get('/member/bookings/index', [MemberBookingController::class, 'index'])->name('member.bookings.index');
     Route::get('/member/advertisements/create', [MemberAdvertisementController::class, 'create'])->name('member.advertisements.create');
     Route::post('/member/advertisements/store', [MemberAdvertisementController::class, 'store'])->name('member.advertisements.store');
     Route::get('/member/advertisements/{advertisement}', [MemberAdvertisementController::class, 'edit'])->name('member.advertisements.edit');
     Route::patch('/member/advertisements/{advertisement}', [MemberAdvertisementController::class, 'update'])->name('member.advertisements.update');
     Route::delete('/member/advertisements/{advertisement}', [MemberAdvertisementController::class, 'destroy'])->name('member.advertisements.destroy');
+
+    /** Member rooms and bookings route */
+
+    Route::get('/member/rooms/index', [MemberRoomController::class, 'index'])->name('member.rooms.index');
+    Route::get('/member/bookings/index', [MemberBookingController::class, 'index'])->name('member.bookings.index');
+    Route::get('/member/bookings/create', [MemberBookingController::class, 'create'])->name('member.bookings.create');
+    Route::post('/member/bookings/store', [MemberBookingController::class, 'store'])->name('member.bookings.store');
+    Route::delete('/member/bookings/{booking}', [MemberBookingController::class, 'destroy'])->name('member.bookings.destroy');
 });
 
 /**

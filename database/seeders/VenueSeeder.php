@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\User;
+use App\Models\Room;
 
-class MemberSeeder extends Seeder
+class VenueSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,12 +16,11 @@ class MemberSeeder extends Seeder
     public function run()
     {
         //
-        $member = [
-            'name' => 'Lue Guo Ming',
-            'email' => 'shs.2014.lgm@gmail.com',
-            'club_id' => 1,
-            'password' => bcrypt('123456')
+        $venue = [
+            'name' => 'Dewan Kejora UTM',
+            'status' => "avaliable",
+            'location' => 'UTM N28a',
         ];
-        User::create($member);
+        Room::create($venue);
     }
 }

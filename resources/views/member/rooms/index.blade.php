@@ -42,7 +42,7 @@
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     
                     <div class="flex space-x-2">
-                      <a href="{{ route('rooms.edit', $room->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Book</a>
+                      <a href="{{ route('member.bookings.create') }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Book</a>
                      </div>
                 </td>
             </tr>

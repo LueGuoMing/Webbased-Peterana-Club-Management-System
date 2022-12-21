@@ -17,5 +17,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
         ]);
+        $this->call([
+            MemberSeeder::class,
+        ]);
+        $this->call([
+            ClubSeeder::class,
+        ]);
+        $this->call([
+            VenueSeeder::class,
+        ]);
     }
 }

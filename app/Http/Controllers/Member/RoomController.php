@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request\RoomStoreRequest;
 use App\Models\Room;
+use App\Enums\RoomStatus;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
