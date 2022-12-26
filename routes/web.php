@@ -27,15 +27,23 @@ use App\Http\Controllers\Member\AdvertisementController as MemberAdvertisementCo
 |
 */
 
-Route::get('/', function () {
+/**
+    Route::get('/', function () {
     return view('welcome');
 });
+*/
 
-Route::get('/clubs/guest',[FrontendClubController::class, 'guest'])->name('clubs.guest');
-Route::get('/clubs/{club}',[FrontendClubController::class, 'show'])->name('clubs.show');
-Route::get('/advertisements/guest',[FrontendAdvertisementController::class, 'guest'])->name('advertisements.guest');
-Route::get('/booking/step-one',[FrontendBookingController::class, 'stepOne'])->name('bookings.step.one');
-Route::get('/booking/step-two',[FrontendBookingController::class, 'stepTwo'])->name('bookings.step.two');
+Route::get('/', [FrontendAdvertisementController::class, 'welcome']);
+
+/** guest */
+Route::get('/guest/clubs/index',[FrontendClubController::class, 'index'])->name('guest.clubs.index');
+Route::get('/guest/clubs/{club}',[FrontendClubController::class, 'show'])->name('guest.clubs.show');
+Route::get('/guest/advertisements/index',[FrontendAdvertisementController::class, 'index'])->name('guest.advertisements.index');
+Route::get('/guest/booking/step-one',[FrontendBookingController::class, 'stepOne'])->name('guest.bookings.step.one');
+Route::post('/guest/booking/step-one',[FrontendBookingController::class, 'storeStepOne'])->name('guest.bookings.store.step.one');
+Route::get('/guest/booking/step-two',[FrontendBookingController::class, 'stepTwo'])->name('guest.bookings.step.two');
+Route::post('/guest/booking/step-two',[FrontendBookingController::class, 'storeStepTwo'])->name('guest.bookings.store.step.two');
+Route::get('/thankyou', [FrontendAdvertisementController::class, 'thankyou'])->name('thankyou');
 
 
 Route::get('/dashboard', function () {
