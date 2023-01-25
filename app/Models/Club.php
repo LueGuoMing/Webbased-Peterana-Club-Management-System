@@ -13,7 +13,7 @@ class Club extends Model
 
     public function advertisements()
     {
-        return $this->belongsToMany(Advertisement::class, 'club_advertisement');
+        return $this->hasMany(Advertisement::class);
     }
 
     public function members()
@@ -24,5 +24,10 @@ class Club extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function documentations()
+    {
+        return $this->hasMany(Documentation::class);
     }
 }

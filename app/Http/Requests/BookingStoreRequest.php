@@ -31,13 +31,13 @@ class BookingStoreRequest extends FormRequest
             'last_name'=>['required'],
             'email'=>['required','email'],
             'tel_number'=>['required'],
-            //'club'=>['required'],
             'purpose'=>['required'],
             'booking_date'=>['required', 'date', new DateBetween, new TimeBetween],
             'room_id'=>['required'],
             'club_id'=>['required'],
             'advertisement_id'=>['required'],
-            'guest_number'=>['required']
+            'guest_number'=>['required'],
+            'status'=>['required']
         ];
     }
 }

@@ -24,7 +24,7 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    <br>
                     <div class="sm:col-span-6">
                       <label for="last_name" class="block text-sm font-medium text-gray-700"> Last Name </label>
                       <div class="mt-1">
@@ -34,7 +34,7 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    <br>
                     <div class="sm:col-span-6">
                       <label for="email" class="block text-sm font-medium text-gray-700"> Email </label>
                       <div class="mt-1">
@@ -44,9 +44,9 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                     </div>
-
+                {{--  --}}<br>
                     <div class="sm:col-span-6">
-                      <label for="tel_number" class="block text-sm font-medium text-gray-700"> Phone Number </label>
+                     <label for="tel_number" class="block text-sm font-medium text-gray-700"> Phone Number </label>
                       <div class="mt-1">
                         <input type="text" id="tel_number" name="tel_number" class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                       </div>
@@ -75,7 +75,7 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    <br>
                       <div class="sm:col-span-6">
                         <label for="booking_date" class="block text-sm font-medium text-gray-700">Reservation Date </label>
                         <div class="mt-1">
@@ -85,7 +85,7 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                       </div>
-
+                      <br>
                       <div class="sm:col-span-6">
                         <label for="guest_number" class="block text-sm font-medium text-gray-700"> Guest Number </label>
                         <div class="mt-1">
@@ -96,27 +96,41 @@
                         @enderror
                       </div>
 
+                      
                       <div class="sm:col-span-6 pt-5">
                         <label for="body" class="block text-sm font-medium text-gray-700">Club</label>
                         <div class="mt-1">
                           <select id="club_id" name="club_id" class="form-multiselect block w-full mt-1">
                             @foreach ($clubs as $club)
                             <option value="{{ $club->id }}">{{ $club->name }} </option>
-                            @endforeach
+                            @endforeach 
                           </select>
                         </div>
                         @error('club_id')
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                       </div>
+                      
 
                       <div class="sm:col-span-6 pt-5">
                         <label for="body" class="block text-sm font-medium text-gray-700">Event</label>
                         <div class="mt-1">
                           <select id="advertisement_id" name="advertisement_id" class="form-multiselect block w-full mt-1">
-                            @foreach ($club->advertisements as $advertisement)
-                            <option value="{{ $advertisement->id }}">{{ $advertisement->title }} </option>
-                            @endforeach
+                            {{--
+                            @foreach ($advertisements as $advertisement)
+                            <option value="{{ $advertisement->id }}">{{ $advertisement->title }}</option>
+                            @endforeach 
+                            --}}  
+                            
+                            @foreach ($clubs as $club)  
+                            @foreach ($club->advertisements as $clubadvertisement)
+                            @foreach ($advertisements as $advertisement)
+                              @if ($clubadvertisement->title === $advertisement->title)
+                            <option value="{{ $advertisement->id }}">{{ $advertisement->title }} - {{ $club->name }}</option>
+                            @endif
+                            @endforeach 
+                            @endforeach   
+                            @endforeach                           
                           </select>
                         </div>
                         @error('advertisement_id')
@@ -137,6 +151,19 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                       </div>
+
+                      <div class="sm:col-span-6 pt-5">
+                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                        <div class="mt-1">
+                          <select id="status" name="status" class="form-multiselect block w-full mt-1">
+                            <option value="Pending">Pending</option>
+                          </select>
+                        </div>
+                        @error('status')
+                        <div class="text-sm text-red-400">{{ $message }}</div>
+                        @enderror
+                      </div>
+
                     <div class="mt-6 p-4">
                     <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Store</button>
                     </div>

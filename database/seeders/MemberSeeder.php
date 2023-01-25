@@ -16,12 +16,20 @@ class MemberSeeder extends Seeder
     public function run()
     {
         //
-        $member = [
+        $member1 = [
             'name' => 'Lue Guo Ming',
             'email' => 'shs.2014.lgm@gmail.com',
             'club_id' => 1,
             'password' => bcrypt('123456')
         ];
-        User::create($member);
+        User::create($member1);
+
+        $member2 = [
+            'name' => 'Erica Desirae',
+            'email' => 'erica@graduate.utm.my',
+            'club_id' => 2,
+            'password' => bcrypt('123456789')
+        ];
+        User::create($member2);
     }
 }

@@ -4,7 +4,7 @@
           
           @foreach($club->advertisements as $advertisement)
 
-          <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
+        <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
             <img class="w-full h-48" src="{{ Storage::url($advertisement->image) }}"
               alt="Image" />
 
@@ -12,11 +12,10 @@
             <div class="flex mb-2">
                 <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 hover:text-blue-700 uppercase">{{ $advertisement->title }}</h4>
             </div>
-            <p class="leading-normal text-gray-700">{{ $advertisement->content }}</p>
+            <p class="leading-normal text-gray-700 text-justify">{{ $advertisement->content }}</p>
           </div>
           <div class="flex items-center justify-between p-4">
-            <button class="px-4 py-2 bg-green-600 text-green-50">Order Now</button>
-            <span class="text-xl text-green-600">kiv</span>
+            <button class="px-4 py-2 bg-green-600 text-green-50"><a href="https://linktr.ee/peterana">Contact Us</button>
           </div>
         </div>
 

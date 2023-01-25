@@ -34,22 +34,8 @@
             <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase">{{ $advertisement->title }}</h4>
             <p class="leading-normal text-gray-700">{{ $advertisement->content }}</p>
           </div>
+
           <div class="flex items-center justify-between p-4">
-            {{-- <button class="px-4 py-2 bg-green-600 text-green-50"> Edit </button> 
-            <span class="text-xl text-green-600">$20.0</span>--}}
-
-          {{--<div class="flex space-x-2">
-              <a href="{{ route('member.advertisements.edit', $advertisement->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Edit</a>
-              <form class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white" 
-              method="POST" 
-              action="{{ route('member.advertisements.destroy',$advertisement->id) }}"
-              onsubmit="return confirm('Are you sure?');">
-              @csrf
-              @method('DELETE')
-              <button type="submit">Delete</button>
-              </form>
-            </div>--}}
-
             <a href="{{ route('member.advertisements.edit', $advertisement->id) }}" class="px-4 py-2 bg-green-600  rounded-lg text-green-50"> Edit </a>
             <form class="px-4 py-2 bg-red-600  rounded-lg text-red-50" 
               method="POST" 
@@ -58,13 +44,12 @@
               @csrf
               @method('DELETE')
               <button type="submit">Delete</button>
-              </form>
-
+            </form>
           </div>
         </div>
-        
       </div>
       @endforeach
     </div>
+
   </section>
 </x-app-layout>

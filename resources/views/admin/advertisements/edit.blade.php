@@ -56,10 +56,10 @@
                         <div class="sm:col-span-6 pt-5">
                           <label for="body" class="block text-sm font-medium text-gray-700">Clubs</label>
                           <div class="mt-1">
-                            <select id="clubs" name="clubs[]" value="{{ $advertisement->club }}"
-                            class="form-multiselect block w-full mt-1" multiple>
+                            <select id="club_id" name="club_id" value="{{ $advertisement->club }}"
+                            class="form-multiselect block w-full mt-1">
                               @foreach ($clubs as $club)
-                              <option value="{{ $club->id }}" @selected($advertisement->clubs->contains($club))>{{ $club->name }}</option>
+                              <option value="{{ $club->id }}" @selected($advertisement->club)>{{ $club->name }}</option>
                               @endforeach
                             </select>
                           </div>

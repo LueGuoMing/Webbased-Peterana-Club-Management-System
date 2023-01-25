@@ -46,16 +46,15 @@
                         </div>
                       
                         <div class="sm:col-span-6 pt-5">
-                          <label for="body" class="block text-sm font-medium text-gray-700">Clubs</label>
+                          <label for="body" class="block text-sm font-medium text-gray-700">Club</label>
                           <div class="mt-1">
-                            <select id="clubs" name="clubs[]" class="form-multiselect block w-full mt-1"
-                              multiple>
+                            <select id="club_id" name="club_id" class="form-multiselect block w-full mt-1">
                               @foreach ($clubs as $club)
                               <option value="{{ $club->id }}">{{ $club->name }}</option>
                               @endforeach
                             </select>
                           </div>
-                          @error('clubs')
+                          @error('club_id')
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                         </div>

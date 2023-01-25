@@ -28,6 +28,7 @@ class AdvertisementStoreRequest extends FormRequest
             'title' => ['required'],
             'content' => ['required'],
             'image' => ['required', 'image'],
+            'club_id' => ['required'],
         ];
     }
 }

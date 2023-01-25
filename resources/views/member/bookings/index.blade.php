@@ -7,7 +7,7 @@
     <div class="text-4xl font-bold">
       <h1>Reservations</h1>
     </div>
-  
+    <br>
     <section>
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -32,12 +32,16 @@
                   Guest
               </th>
               <th scope="col" class="py-3 px-6">
+                Status
+            </th>
+              <th scope="col" class="py-3 px-6">
                   Action
               </th>
               </tr>
           </thead>
           <tbody>
-              @foreach ($bookings as $booking)
+            @foreach ($clubs as $club)
+            @foreach ($club->bookings as $booking)
               <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                   <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $booking -> first_name}} {{ $booking -> last_name }}
@@ -57,6 +61,9 @@
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{ $booking -> guest_number }}
                 </td>
+                <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ $booking -> status }}
+                </td>
                   <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       
                       <div class="flex space-x-2">
@@ -72,6 +79,7 @@
                   </td>
               </tr>
               @endforeach
+            @endforeach
           </tbody>
       </table>
     </div>

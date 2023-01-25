@@ -14,10 +14,6 @@
               </div>
               <p class="leading-normal text-gray-700">{{ $club->description }}</p>
             </div>
-            <div class="flex items-center justify-between p-4">
-              <button class="px-4 py-2 bg-green-600 text-green-50">Order Now</button>
-              <span class="text-xl text-green-600">kiv</span>
-            </div>
           </div>
 
           @endforeach

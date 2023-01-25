@@ -24,7 +24,7 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    <br>
                     <div class="sm:col-span-6">
                       <label for="last_name" class="block text-sm font-medium text-gray-700"> Last Name </label>
                       <div class="mt-1">
@@ -34,7 +34,7 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    <br>
                     <div class="sm:col-span-6">
                       <label for="email" class="block text-sm font-medium text-gray-700"> Email </label>
                       <div class="mt-1">
@@ -45,6 +45,8 @@
                         @enderror
                     </div>
 
+                    <br>
+                    
                     <div class="sm:col-span-6">
                       <label for="tel_number" class="block text-sm font-medium text-gray-700"> Phone Number </label>
                       <div class="mt-1">
@@ -76,6 +78,8 @@
                         @enderror
                     </div>
 
+                    <br>
+
                       <div class="sm:col-span-6">
                         <label for="booking_date" class="block text-sm font-medium text-gray-700">Reservation Date </label>
                         <div class="mt-1">
@@ -85,6 +89,8 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                       </div>
+
+                      <br>
 
                       <div class="sm:col-span-6">
                         <label for="guest_number" class="block text-sm font-medium text-gray-700"> Guest Number </label>
@@ -100,10 +106,14 @@
                         <label for="body" class="block text-sm font-medium text-gray-700">Club</label>
                         <div class="mt-1">
                           <select id="club_id" name="club_id" class="form-multiselect block w-full mt-1">
+                           {{-- 
                             @foreach($clubs as $club)  
                             <option value="{{ $club->id }}">{{ $club->name }} </option>              
                             @endforeach
-                            
+                          --}}
+                          @foreach($clubs as $club)
+                          <option value="{{$club->id }}" @selected($club->name == Auth::user()->club)>{{ $club->name }} </option>
+                          @endforeach
                           </select>
                         </div>
                         @error('club_id')
@@ -129,17 +139,28 @@
                         <label for="body" class="block text-sm font-medium text-gray-700">Room</label>
                         <div class="mt-1">
                           <select id="room_id" name="room_id" class="form-multiselect block w-full mt-1">
-                            
-                            @foreach ($rooms as $room)
-                            <option value="{{ $room->id }}">{{ $room->name }} </option>
-                            @endforeach
-
+                          @foreach($rooms as $room)                                 
+                            <option value="{{ $room->id }}"> {{ $room->name }} </option>
+                          @endforeach
                           </select>
                         </div>
                         @error('room_id')
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                       </div>
+
+                      <div class="sm:col-span-6 pt-5">
+                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                        <div class="mt-1">
+                          <select id="status" name="status" class="form-multiselect block w-full mt-1">                            
+                            <option value="Pending"> Pending </option>
+                          </select>
+                        </div>
+                        @error('status')
+                        <div class="text-sm text-red-400">{{ $message }}</div>
+                        @enderror
+                      </div>
+                      
                     <div class="mt-6 p-4">
                     <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Store</button>
                     </div>

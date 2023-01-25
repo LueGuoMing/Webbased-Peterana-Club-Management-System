@@ -25,6 +25,9 @@
                     Image
                 </th>
                 <th scope="col" class="py-3 px-6">
+                    Club
+                </th>
+                <th scope="col" class="py-3 px-6">
                     Action
                 </th>
             </tr>
@@ -41,6 +44,11 @@
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <img src="{{ Storage::url($advertisement->image) }}" class="w-16 h-16 rounded">
                 </td>
+                
+                <td class="py-4 px-6 font-medium text-gray-900 whitespace-wrap dark:text-white">
+                    {{ $advertisement -> club->name  }}
+                </td>
+                
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     
                     <div class="flex space-x-2">

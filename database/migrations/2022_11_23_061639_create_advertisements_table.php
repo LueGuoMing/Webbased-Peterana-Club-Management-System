@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('image');
+            $table->unsignedBigInteger('club_id');
             $table->timestamps();
         });
     }

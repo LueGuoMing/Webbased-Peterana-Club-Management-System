@@ -9,7 +9,7 @@ use App\Models\Club;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class AdvertisementController extends Controller
 {
@@ -30,7 +30,7 @@ class AdvertisementController extends Controller
     public function create()
     {
         //
-        $clubs = Club::all();
+        $clubs = Club::where('name', Auth::user()->club->name)->get();
         return view('member.advertisements.create',compact('clubs'));
     }
 
@@ -49,11 +49,9 @@ class AdvertisementController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'image' => $image,
+            'club_id' => $request->club_id,
         ]);
 
-        if($request->has('clubs')){
-            $advertisement->clubs()->attach($request->clubs);
-        }
         return to_route('member.clubs.index')->with('success','Event created successfully');
     }
 
@@ -83,6 +81,7 @@ class AdvertisementController extends Controller
         $request->validate([
             'title'=>'required',
             'content'=>'required',
+            'club_id'=>'required',
         ]);
         $image = $advertisement->image;
         if($request->hasFile('image')){
@@ -94,11 +93,8 @@ class AdvertisementController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'image' => $image,
+            'club_id' => $request->club_id,
         ]);
-
-        if($request->has('clubs')){
-            $advertisement->clubs()->sync($request->clubs);
-        }
 
         return to_route('member.clubs.index')->with('success','Event updated successfully');
     }
@@ -113,7 +109,6 @@ class AdvertisementController extends Controller
     {
         //
         Storage::delete($advertisement->image);
-        $advertisement->clubs()->detach();
         $advertisement->bookings()->delete();
         $advertisement->delete();
 

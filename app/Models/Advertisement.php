@@ -9,11 +9,11 @@ class Advertisement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'image'];
+    protected $fillable = ['title', 'content', 'image','club_id'];
 
-    public function clubs()
+    public function club()
     {
-        return $this->belongsToMany(Club::class,'club_advertisement');
+        return $this->belongsTo(Club::class);
     }
 
     public function bookings()

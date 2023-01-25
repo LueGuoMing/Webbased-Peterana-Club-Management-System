@@ -71,17 +71,15 @@
                         <div class="sm:col-span-6 pt-5">
                           <label for="body" class="block text-sm font-medium text-gray-700">Club</label>
                           <div class="mt-1">
-                           <select id="clubs" name="clubs[]" class="form-multiselect block w-full mt-1">
+                           <select id="club_id" name="club_id" class="form-multiselect block w-full mt-1">
                             @foreach($clubs as $club)
-                              {{--  @if ($club->id === Auth::user()->club->id)
-                                <option value="{{$club->id }}">{{ $club->name }} </option>
+                            @if ($club->id == Auth::user()->club->id)
+                              <option value="{{$club->id }}" @selected ($club->name == Auth::user()->club)>{{ $club->name }} </option>
                               @endif
-                              --}}
-                              <option value="{{$club->id }}">{{ $club->name }} </option>
                             @endforeach
                           </select>
                           </div>
-                          @error('clubs')
+                          @error('club_id')
                           <div class="text-sm text-red-400">{{ $message }}</div>
                           @enderror
                         </div>

@@ -16,11 +16,32 @@ class VenueSeeder extends Seeder
     public function run()
     {
         //
-        $venue = [
+        $room1 = [
             'name' => 'Dewan Kejora UTM',
             'status' => "avaliable",
             'location' => 'UTM N28a',
         ];
-        Room::create($venue);
+        Room::create($room1);
+
+        $room2 = [
+            'name' => 'Dewan Resak UTM',
+            'status' => "pending",
+            'location' => 'M01',
+        ];
+        Room::create($room2);
+
+        $room3 = [
+            'name' => 'N24',
+            'status' => "unavaliable",
+            'location' => 'Jalan ???',
+        ];
+        Room::create($room3);
+
+        $room4 = [
+            'name' => 'Arked Angkasa',
+            'status' => "avaliable",
+            'location' => 'KTDI',
+        ];
+        Room::create($room4);
     }
 }

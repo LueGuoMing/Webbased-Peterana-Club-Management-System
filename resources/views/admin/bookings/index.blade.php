@@ -34,6 +34,15 @@
                     Guest
                 </th>
                 <th scope="col" class="py-3 px-6">
+                    Status
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Approve
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Reject
+                </th>
+                <th scope="col" class="py-3 px-6">
                     Action
                 </th>
             </tr>
@@ -59,11 +68,49 @@
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{ $booking -> guest_number }}
                 </td>
+                <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">   
+                    {{ $booking -> status }}
+                </td>
+                <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">   
+                   {{--
+                    
+                    <a href="{{ route('admin.bookings.approve',$booking->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Approve</a>
+                      --}}
+                    @if($booking->status === 'Approved')
+                    <a class="px-4 py-2 bg-gray-500 hover:bg-gray-700 rounded-lg text-white" disabled>Approved</a>
+                    @else
+                    <form class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white" 
+                    method="GET" 
+                    action="{{ route('admin.bookings.approve',$booking->id) }}"
+                    onsubmit="return confirm('Are you sure?');">
+                    @csrf
+                    @method('GET')
+                    <button type="submit">Approve</button>
+                    </form>
+                    @endif
+                </td>
+                <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">   
+                    {{--  
+                    <a href="{{ route('admin.bookings.reject',$booking->id) }}" class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white">Reject</a>
+                    --}}
+                    @if($booking->status === 'Rejected')
+                    <a class="px-4 py-2 bg-gray-500 hover:bg-gray-700 rounded-lg text-white" disabled>Rejected</a>
+                    @else
+                    <form class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white" 
+                    method="POST" 
+                    action="{{ route('admin.bookings.reject',$booking->id) }}"
+                    onsubmit="return confirm('Are you sure?');">
+                    @csrf
+                    @method('POST')
+                    <button type="submit">Reject</button>
+                    </form>
+                    @endif
+                </td>
 
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     
                     <div class="flex space-x-2">
-                    <!--<a href="{{ route('bookings.edit', $booking->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Edit</a>-->
+                        {{--
                     <form class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white" 
                     method="POST" 
                     action="{{ route('bookings.destroy',$booking->id) }}"
@@ -71,8 +118,20 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit">Delete</button>
-                </form>
-            </div>
+                    </form>  --}}
+                    <form 
+                    method="POST" 
+                    action="{{ route('bookings.destroy',$booking->id) }}"
+                    onsubmit="return confirm('Are you sure?');">
+                    @csrf
+                    @method('DELETE')
+                    <button>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                      </svg>
+                    </button>
+                    </form> 
+                    </div>
                 </td>
             </tr>
             @endforeach

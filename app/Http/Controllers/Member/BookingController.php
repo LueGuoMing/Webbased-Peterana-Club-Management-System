@@ -8,9 +8,12 @@ use App\Http\Requests\BookingStoreRequest;
 use App\Models\Booking;
 use App\Models\Room;
 use App\Models\Club;
+use App\Models\Admin;
 use App\Models\Advertisement;
 use Carbon\Carbon;
 use App\Enums\RoomStatus;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\AdminBookingNotification;
 
 class BookingController extends Controller
 {
@@ -22,8 +25,10 @@ class BookingController extends Controller
     public function index()
     {
         //
+        $clubs = Club::where('name', Auth::user()->club->name)->get();
         $bookings = Booking::all();
-        return view('member.bookings.index', compact('bookings'));
+        return view('member.bookings.index', compact('clubs','bookings'));
+        
     }
 
         /**
@@ -31,14 +36,16 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Room $room)
     {
         //
-        $rooms = Room::where('status',RoomStatus::Avaliable)->get();
-        $clubs = Club::all();
         //$rooms = Room::where('status',RoomStatus::Avaliable)->get();
+        //$rooms = Room::where('id', $room->id)->get();
+        //$clubs = Club::all();
+        $rooms = Room::where('status',RoomStatus::Avaliable)->get();
         //$club = Club::where('id','$user->club')->get();
         $advertisements = Advertisement::all();
+        $clubs = Club::where('name', Auth::user()->club->name)->get();
         return view('member.bookings.create', compact('rooms','clubs'));
     }
 
@@ -52,8 +59,8 @@ class BookingController extends Controller
     {
         //
         $room = Room::findOrFail($request->room_id);
-        Club::findOrFail($request->club_id);
-        Advertisement::findOrFail($request->advertisement_id);
+        $club = Club::findOrFail($request->club_id);
+        $advertisement = Advertisement::findOrFail($request->advertisement_id);
 
         if($request->guest_number > 50){
             return back()->with('danger','Fail to book! The maximum number of guest is 50');
@@ -65,8 +72,21 @@ class BookingController extends Controller
             }
         }
 
-        Booking::create($request->validated());
-        return to_route('member.rooms.index')->with('sucess','Booking created successfully');
+        $booking = Booking::create($request->validated());
+
+        $details = [
+            'club' => $club->name,
+            'room' => $room->name,
+            'event' => $advertisement->title,
+            'date' => $request->booking_date,
+        ];
+
+        $admins = Admin::all();
+        foreach ($admins as $admin)
+        {
+        $admin->notify(new AdminBookingNotification($details));
+        }
+        return to_route('member.rooms.index')->with('success','Booking created successfully');
     }
 
     /**

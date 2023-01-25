@@ -5,10 +5,12 @@
         </h2>
     </x-slot>
 
+    
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-end m-2 p-2">
-                <a href="{{ route('clubs.create') }}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">New Club</a>
+                <a href="{{ route('documentation.create') }}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Upload</a>
             </div>
 
 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -16,43 +18,57 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="py-3 px-6">
-                    Name
+                    Title
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    Image
+                    Document
                 </th>
                 <th scope="col" class="py-3 px-6">
+                    Club
+                </th>
+               {{-- <th scope="col" class="py-3 px-6">
                     Description
-                </th>
+                </th>--}}
                 <th scope="col" class="py-3 px-6">
                     Action
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($clubs as $club)
+            @foreach ($documentations as $documentation)
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $club -> name }}
+                    {{ $documentation -> title }}
                 </td>
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img src="{{ Storage::url($club->image) }}" class="w-16 h-16 rounded">
+                   {{--  
+                    <img src="{{ Storage::url($documentation->image) }}" class="w-16 h-16 rounded">
+                    --}}
+                    {{ $documentation -> document }}
+
                 </td>
+                {{--
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-wrap dark:text-white">
                     {{ $club -> description }}
-                </td>
+                </td>--}}
+
+                    <td class="py-4 px-6 font-medium text-gray-900 whitespace-wrap dark:text-white">
+                        {{ $documentation -> club -> name }}
+                    </td>
+
+
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     
                     <div class="flex space-x-2">
-                    <a href="{{ route('clubs.edit', $club->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Edit</a>
+                    <a href="{{ route('admin.documentation.download', $documentation->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Download</a>
                     <form class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white" 
                     method="POST" 
-                    action="{{ route('clubs.destroy',$club->id) }}"
+                    action="{{ route('documentation.destroy',$documentation->id) }}"
                     onsubmit="return confirm('Are you sure?');">
                     @csrf
                     @method('DELETE')
                     <button type="submit">Delete</button>
-                </form>
+                    </form>
             </div>
                 </td>
             </tr>

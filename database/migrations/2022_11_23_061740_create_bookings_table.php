@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('tel_number');
-            //$table->string('club');
             $table->text('purpose');
             $table->dateTime('booking_date');
             $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('club_id');
             $table->unsignedBigInteger('advertisement_id');
             $table->integer('guest_number');
+            $table->string('status');
             $table->timestamps();
         });
     }

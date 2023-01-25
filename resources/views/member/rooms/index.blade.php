@@ -7,7 +7,7 @@
   <div class="text-4xl font-bold">
     <h1>Room</h1>
   </div>
-
+  <br>
   <section>
   <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -41,9 +41,19 @@
                 </td>
                 <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     
+                    @if($room->status->name === 'Avaliable')
                     <div class="flex space-x-2">
-                      <a href="{{ route('member.bookings.create') }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Book</a>
+                      <a href="{{ route('member.bookings.create', $room->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Book</a>
                      </div>
+                     @elseif($room->status->name === 'Unavaliable')
+                     <div class="flex space-x-2">
+                        <a  class="px-4 py-2 bg-red-500 rounded-lg text-white">Unavailable</a>
+                       </div>
+                     @elseif($room->status->name === 'Pending')
+                    <div class="flex space-x-2">
+                        <a class="px-4 py-2 bg-red-500 rounded-lg text-white" >Pending</a>
+                    </div>
+                     @endif
                 </td>
             </tr>
             @endforeach

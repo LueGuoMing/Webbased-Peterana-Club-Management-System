@@ -50,11 +50,9 @@ class AdvertisementController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'image' => $image,
+            'club_id' => $request->club_id,
         ]);
 
-        if($request->has('clubs')){
-            $advertisement->clubs()->attach($request->clubs);
-        }
         return to_route('advertisements.index')->with('success','Advertisement created successfully');
     }
 
@@ -95,6 +93,7 @@ class AdvertisementController extends Controller
         $request->validate([
             'title'=>'required',
             'content'=>'required',
+            'club_id' => 'required',
         ]);
         $image = $advertisement->image;
         if($request->hasFile('image')){
@@ -106,11 +105,8 @@ class AdvertisementController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'image' => $image,
+            'club_id' => $request->club_id,
         ]);
-
-        if($request->has('clubs')){
-            $advertisement->clubs()->sync($request->clubs);
-        }
 
         return to_route('advertisements.index')->with('success','Advertisement updated successfully');
     }
@@ -125,7 +121,6 @@ class AdvertisementController extends Controller
     {
         //
         Storage::delete($advertisement->image);
-        $advertisement->clubs()->detach();
         $advertisement->bookings()->delete();
         $advertisement->delete();
 
